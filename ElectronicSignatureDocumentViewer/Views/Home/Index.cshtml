@@ -1,0 +1,75 @@
+﻿@model ElectronicSignatureDocumentViewer.Models.SignatureData
+@using TXTextControl.Web.MVC.DocumentViewer
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.TXTextControl().DocumentViewer(settings =>
+{
+    settings.DocumentPath = Server.MapPath("~/App_Data/contract.tx");
+    settings.Dock = DocumentViewerSettings.DockStyle.Window;
+    settings.IsSelectionActivated = true;
+    settings.ShowThumbnailPane = true;
+    settings.SignatureSettings = new SignatureSettings()
+    {
+        OwnerName = "Paul Paulsen",
+        SignerName = Model.Signer,
+        ShowSignatureBar = true,
+        UniqueId = Guid.NewGuid().ToString(),
+
+        CustomSignatureData = new ElectronicSignatureDocumentViewer.Models.SignatureData()
+        {
+            Barcode = Model.Barcode,
+            Signer = Model.Signer,
+            IPAddress = Model.IPAddress
+        }
+    };
+}).Render()
+
+<script>
+    // set the callback method after submit
+    TXDocumentViewer.setSubmitCallback(exportPDF);
+
+    function exportPDF(e) {
+        var serviceURL = "@Url.Action("ExportPDF", "Sign")";
+
+        console.log(e);
+
+        // send document to controller
+        $.ajax({
+            type: "POST",
+            url: serviceURL,
+            data: {
+                document: e.document
+            },
+            success: successFunc,
+            error: errorFunc
+        });
+    }
+
+    function successFunc(data, status) {
+
+        // create temporary link to download document
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:application/octet-stream;base64,' + data);
+        element.setAttribute('download', "result.pdf");
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        // simulate click
+        element.click();
+
+        // remove the link
+        document.body.removeChild(element);
+
+        window.location = "\Thanks"
+    }
+
+    function errorFunc() {
+        alert("Error");
+    }
+</script>
