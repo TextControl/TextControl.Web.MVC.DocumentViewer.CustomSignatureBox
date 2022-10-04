@@ -31,7 +31,7 @@
 
 <script>
     // set the callback method after submit
-    TXDocumentViewer.setSubmitCallback(exportPDF);
+    window.addEventListener("documentViewerLoaded", function () { TXDocumentViewer.setSubmitCallback(exportPDF) });
 
     function exportPDF(e) {
         var serviceURL = "@Url.Action("ExportPDF", "Sign")";
