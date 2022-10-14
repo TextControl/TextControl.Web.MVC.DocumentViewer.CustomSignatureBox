@@ -139,8 +139,8 @@
     <Reference Include="TXTextControl.Server, Version=31.0.1600.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="TXTextControl.Web.MVC.DocumentViewer, Version=31.0.0.0, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL">
-      <HintPath>..\packages\TXTextControl.Web.DocumentViewer.31.0.0\lib\net45\TXTextControl.Web.MVC.DocumentViewer.dll</HintPath>
+    <Reference Include="TXTextControl.Web.MVC.DocumentViewer, Version=31.0.406.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL">
+      <HintPath>..\packages\TXTextControl.Web.DocumentViewer.31.0.1\lib\net45\TXTextControl.Web.MVC.DocumentViewer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
